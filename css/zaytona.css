@@ -425,11 +425,18 @@ body {
   width: 400px;
   box-shadow: 0 0 10px #ddd;
 }
-@media (max-width: 768px) {
-  .reviews {
-    background: none;
-    height: 100vh;
-  }
+.reviews .card .user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.reviews .card .user-img {
+  width: 15%;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #e55451;
 }
 /* End section four */
 

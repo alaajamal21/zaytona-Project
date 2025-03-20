@@ -294,17 +294,18 @@
     <script src="../js/GSAPanimation.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-performance.js"></script>
-
+    
     <script type="module">
       import { db } from "../js/firebaseConfig.js";
-      import { collection, getDocs, limit } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+      import { collection, getDocs, limit, query } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
     
       const photoFrame = document.querySelector(".photoframe .container");
       photoFrame.innerHTML = "";
     
       async function loadUserImages() {
         try {
-          const querySnapshot = await getDocs(collection(db, "Zaytona_UploadedImages"), limit(4));
+          const q = query(collection(db, "Zaytona_UploadedImages"), limit(4));
+          const querySnapshot = await getDocs(q);
           querySnapshot.forEach((doc) => {
             const data = doc.data();
             if (data.imageUrl) {
@@ -318,30 +319,42 @@
           console.error("❌ خطأ أثناء تحميل الصور:", error);
         }
       }
-
+    
       async function fetchContactMessages() {
-      const messagesContainer = document.getElementById("messagesContainer"); 
-      const querySnapshot = await getDocs(collection(db, "Zaytona_ContactMessages"), limit(3));
-
-      querySnapshot.forEach((doc) => {
-        const data = doc.data();
-        const messageCard = `
+        const messagesContainer = document.getElementById("messagesContainer");
+        messagesContainer.innerHTML = "";
+        const q = query(collection(db, "Zaytona_ContactMessages"), limit(3));
+        const querySnapshot = await getDocs(q);
+    
+        // Fetch uploaded images for users
+        const imagesSnapshot = await getDocs(collection(db, "Zaytona_UploadedImages"));
+        const userImages = {};
+        imagesSnapshot.forEach((imgDoc) => {
+          const imgData = imgDoc.data();
+          userImages[imgData.uploadedBy] = imgData.imageUrl;
+        });
+    
+        querySnapshot.forEach((messageDoc) => {
+          const data = messageDoc.data();
+          const userImage = userImages[data.userId] || "default.png"; // صورة افتراضية لو ما في صورة
+          const messageCard = `
             <div class="card">
-              <p> "${data.message || 'لا توجد رسالة'}" </p>
+              <p>"${data.message || 'لا توجد رسالة'}"</p>
               <div class="user-info">
-                <h4>${data.name || 'مجهول'}</h4>
-             </div>
+                <img src="${userImage}" alt="صورة المستخدم" class="user-img">
+                <h5>${data.name || 'مجهول'}</h5>
+              </div>
             </div>
-        `;
-        messagesContainer.innerHTML += messageCard;
-         });
+          `;
+          messagesContainer.innerHTML += messageCard;
+        });
       }
-
     
       loadUserImages();
       fetchContactMessages();
     </script>
     
-      
+    
+
   </body>
 </html>
