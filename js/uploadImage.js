@@ -1,58 +1,53 @@
-// استيراد Firebase Services من firebaseConfig.js
 import { storage, db } from "./firebaseConfig.js";
 import { ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
 import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-// التأكد من تحميل العناصر قبل تنفيذ الوظيفة
 document.addEventListener("DOMContentLoaded", () => {
-    const fileInput = document.getElementById("imageUpload");
-    const uploadButton = document.getElementById("uploadButton");
-    const uploadStatus = document.getElementById("uploadStatus");
+    const uploadForm = document.getElementById("uploadForm");
+    const fileInput = document.getElementById("file");
+    const uploadButton = document.getElementById("uploadBtn");
 
-    if (!fileInput || !uploadButton || !uploadStatus) {
-        console.error("❌ خطأ: أحد العناصر غير موجود في HTML!");
+    if (!uploadForm || !fileInput || !uploadButton) {
+        console.error("❌ تأكد من وجود الفورم و الـ input والزر بالصفحة");
         return;
     }
 
-    // وظيفة تحميل الصورة إلى Firebase Storage وتخزين الرابط في Firestore
-    async function uploadImage() {
-        const file = fileInput.files[0]; 
+    uploadForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
 
+        const file = fileInput.files[0];
         if (!file) {
-            uploadStatus.innerText = "❌ الرجاء اختيار صورة أولًا!";
+            alert("❌ الرجاء اختيار صورة قبل الرفع");
             return;
         }
 
-        uploadStatus.innerText = "جاري رفع الصورة..";
-
-        
-        // إنشاء مرجع للصورة في التخزين السحابي
-        const storageRef = ref(storage, `images/${file.name}`);
-
         try {
-            // رفع الصورة إلى التخزين السحابي
+            console.log("🔄 جاري رفع الصورة...");
+
+            // ✅ جلب بيانات المستخدم
+            const user = JSON.parse(localStorage.getItem("user"));
+            const userId = user ? user.uid : "unknown_user";
+
+            // ✅ تحديد مسار تخزين الصور بمجلد مخصص لزيتونة
+            const storageRef = ref(storage, `zaytona/uploaded_images/${userId}_${file.name}`);
             await uploadBytes(storageRef, file);
-            console.log("✅ تم رفع الصورة بنجاح!");
 
-            // جلب رابط التحميل
             const downloadURL = await getDownloadURL(storageRef);
-            console.log("🔗 رابط الصورة:", downloadURL);
+            console.log("✅ تم رفع الصورة بنجاح!");
+            console.log("📌 رابط الصورة:", downloadURL);
 
-            // حفظ رابط الصورة في Firestore
-            await addDoc(collection(db, "uploadedImages"), {
+            // ✅ تخزين رابط الصورة مع userId في Firestore
+            await addDoc(collection(db, "Zaytona_UploadedImages"), {
                 imageUrl: downloadURL,
-                uploadedAt: new Date().toISOString()
+                uploadedAt: new Date().toISOString(),
+                uploadedBy: userId
             });
 
-            console.log("✅ تم تخزين رابط الصورة في Firestore!");
-            uploadStatus.innerText = "✅ تم رفع الصورة وتخزينها بنجاح!";
-            
-        } catch (error) {
-            console.error("❌ حدث خطأ أثناء الرفع:", error);
-            uploadStatus.innerText = "❌ حدث خطأ أثناء رفع الصورة!";
-        }
-    }
+            alert("✅ تم رفع الصورة وتخزين بياناتها بنجاح!");
 
-    // ربط الوظيفة بزر الرفع
-    uploadButton.addEventListener("click", uploadImage);
+        } catch (error) {
+            console.error("❌ خطأ أثناء رفع الصورة:", error);
+            alert("❌ حدث خطأ أثناء رفع الصورة! حاول مرة أخرى.");
+        }
+    });
 });

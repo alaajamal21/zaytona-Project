@@ -1,7 +1,8 @@
 
 
-import { db } from "./firebaseConfig.js";
+import { db, auth } from "./firebaseConfig.js";
 import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     const contactForm = document.getElementById("contactForm");
@@ -10,6 +11,19 @@ document.addEventListener("DOMContentLoaded", () => {
         console.error("❌ لم يتم العثور على نموذج الاستفسارات!");
         return;
     }
+
+    let currentUser = null;
+
+    // ✅ التأكد مما إذا كان المستخدم مسجل دخول
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            console.log("✅ المستخدم مسجل دخول:", user.uid);
+            currentUser = user;
+        } else {
+            console.log("❌ لم يتم تسجيل دخول المستخدم!");
+            currentUser = null;
+        }
+    });
 
     contactForm.addEventListener("submit", async (e) => {
         e.preventDefault();
@@ -29,13 +43,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
         try {
             console.log("🔹 إرسال البيانات إلى Firestore...");
-            await addDoc(collection(db, "contactMessages"), {
+
+            // ✅ حفظ الاستفسارات داخل `Zaytona_ContactMessages`
+            await addDoc(collection(db, "Zaytona_ContactMessages"), {
+                userId: currentUser ? currentUser.uid : "Guest",
                 name,
                 email,
                 phone,
                 message,
+                appType: "Zaytona", 
                 timestamp: new Date().toISOString()
             });
+
             console.log("✅ تم إرسال الاستفسار بنجاح!");
             alert("✅ تم إرسال رسالتك بنجاح!");
             contactForm.reset();

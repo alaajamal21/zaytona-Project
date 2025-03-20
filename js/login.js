@@ -1,6 +1,7 @@
 
-import { auth } from "./firebaseConfig.js";
+import { auth, db } from "./firebaseConfig.js";
 import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     const loginForm = document.getElementById("loginForm");
@@ -32,22 +33,42 @@ document.addEventListener("DOMContentLoaded", () => {
 
         try {
             console.log("🔹 محاولة تسجيل الدخول في Firebase Authentication...");
-            const userCredential = await signInWithEmailAndPassword(auth, email,
-                 password);
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
             console.log("✅ تم تسجيل الدخول بنجاح!", user.uid);
 
+            // ✅ البحث عن بيانات المستخدم في Firestore داخل مجموعة `Zaytona_Users`
+            const userDoc = await getDoc(doc(db, "Zaytona_Users", user.uid));
+
+            if (!userDoc.exists()) {
+                console.log("❌ هذا المستخدم غير مسجل في زيتونة!");
+                alert("❌ لا يمكنك تسجيل الدخول إلى زيتونة!");
+                return;
+            }
+
+            const userData = userDoc.data();
+
+            // ✅ التحقق مما إذا كان المستخدم ينتمي إلى زيتونة
+            if (userData.appType !== "Zaytona") {
+                console.log("❌ هذا المستخدم ليس جزءًا من زيتونة!");
+                alert("❌ لا يمكنك تسجيل الدخول إلى زيتونة!");
+                return;
+            }
+
+            console.log("✅ تم التحقق من أن المستخدم ينتمي إلى زيتونة!");
             message.innerHTML = "✅ تم تسجيل الدخول بنجاح!";
             message.style.color = "green";
             loginForm.appendChild(message);
 
-            //تخزين بيانات المستخدم في localStorage
-            localStorage.setItem("user", JSON.stringify({ uid: user.uid,
-                 email: user.email }));
-            console.log("📌 بيانات المستخدم تم تخزينها في `localStorage`:",
-                 localStorage.getItem("user"));
+            // ✅ تخزين بيانات المستخدم في localStorage
+            localStorage.setItem("user", JSON.stringify({
+                uid: user.uid,
+                email: user.email,
+                fullName: userData.fullName
+            }));
+            console.log("📌 بيانات المستخدم تم تخزينها في `localStorage`:", localStorage.getItem("user"));
 
-            //إعادة توجيه المستخدم إلى الصفحة الرئيسية بعد تسجيل الدخول
+            // ✅ إعادة توجيه المستخدم إلى الصفحة الرئيسية بعد تسجيل الدخول
             setTimeout(() => {
                 window.location.href = "home.html";
             }, 2000);

@@ -115,7 +115,6 @@
           data-aos-easing="ease-in-sine">
             <img class="frame-img" src="../imgs/frame.svg" alt="frame"></img>
             <img class="Maincharacter" src="../imgs/hiPoseBoy.svg" alt="poy"></img>
-            <img class="icon" alt="icon"></img>
           </div>
         </div>
       </div>
@@ -188,44 +187,8 @@
     <section class="reviews" style="margin-top: 8rem;">
       <div class="container">
         <h1 class="heading" data-aos="fade-left">رأي الأهالي في تجربتهم</h1>
-        <div class="reviewCards">
-          <div class="card">
-            <p class="quote">“ منصة رائعة
-              ابنتي تحب الأنشطة 
-                بعد القصص كثيرًا، نحن في انتظار القصص القادمة! ”</p>
-              <div class="client-info">
-                  <img src="../imgs/girl.jpg" alt="Client 1">
-                  <div>
-                      <h4> زينة محمد </h4>
-                      <p class="country">غزة</p>
-                  </div>
-              </div>
-          </div>
-          <div class="card">
-            <p class="quote">“ منصة رائعة
-              ابنتي تحب الأنشطة 
-                بعد القصص كثيرًا، نحن في انتظار القصص القادمة! ”</p>
-              <div class="client-info">
-                  <img src="../imgs/girl.jpg" alt="Client 1">
-                  <div>
-                      <h4> زينة محمد </h4>
-                      <p class="country">غزة</p>
-                  </div>
-              </div>
-          </div>
-          <div class="card">
-            <p class="quote">“ منصة رائعة
-              ابنتي تحب الأنشطة 
-                بعد القصص كثيرًا، نحن في انتظار القصص القادمة! ”</p>
-              <div class="client-info">
-                  <img src="../imgs/girl.jpg" alt="Client 1">
-                  <div>
-                      <h4> زينة محمد </h4>
-                      <p class="country">غزة</p>
-                  </div>
-              </div>
-          </div>
-
+          <div id="messagesContainer" class="messages-container"></div>
+      </div>
     </section>
 
     <!-- section five -->
@@ -236,18 +199,22 @@
             <h2 class="heading" data-aos="fade-left">هل تود مشاركتنا صورتك الرائعة؟</h2>
             <p class="paragraph">إذا كنت ترغب في ذلك، أرسل لنا صورة تظهر فيها وأنت تمارس نشاطك المفضل
               على زيتونة وسنشاركها مع الأصدقاء.</p>
-              <input type="file" id="imageUpload" accept="image/*">
-              <button id="uploadButton">قم بتحميل الصورة<i class="fas fa-download"></i></button>
-              <p id="uploadStatus"></p>
+
+              <form id="uploadForm">
+                <input type="file" id="file" accept="image/*"/>
+                <button id="uploadBtn">قم بتحميل الصورة<i class="fas fa-download"></i></button>
+              </form>
+
           </div>
           <div class="photoframe col-lg-5">
-            <div class="container" data-aos="fade-down-right" data-aos-offset="400"
+            <!-- <div class="container" data-aos="fade-down-right" data-aos-offset="400"
             data-aos-easing="ease-in-sine">
               <div class="grid-item story-card"><img src="../imgs/girl.jpg" alt="صورة 1"></div>
               <div class="grid-item story-card"><img src="../imgs/girl.jpg" alt="صورة 1"></div>
               <div class="grid-item story-card"><img src="../imgs/girl.jpg" alt="صورة 1"></div>
               <div class="grid-item story-card"><img src="../imgs/girl.jpg" alt="صورة 1"></div>
-            </div>
+            </div> -->
+            <div class="container"></div>
           </div>
           </div>
           </div>
@@ -321,10 +288,60 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <!-- page js -->
     <script src="../js/zaytona.js"></script>
+    <script type="module" src="../js/firebaseConfig.js"></script>
     <script type="module" src="../js/uploadImage.js"></script>
     <script src="../js/GSAPhome.js"></script>
     <script src="../js/GSAPanimation.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-performance.js"></script>
+
+    <script type="module">
+      import { db } from "../js/firebaseConfig.js";
+      import { collection, getDocs, limit } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+    
+      const photoFrame = document.querySelector(".photoframe .container");
+      photoFrame.innerHTML = "";
+    
+      async function loadUserImages() {
+        try {
+          const querySnapshot = await getDocs(collection(db, "Zaytona_UploadedImages"), limit(4));
+          querySnapshot.forEach((doc) => {
+            const data = doc.data();
+            if (data.imageUrl) {
+              const imgDiv = document.createElement("div");
+              imgDiv.classList.add("grid-item", "story-card");
+              imgDiv.innerHTML = `<img src="${data.imageUrl}" alt="صورة مشاركة">`;
+              photoFrame.appendChild(imgDiv);
+            }
+          });
+        } catch (error) {
+          console.error("❌ خطأ أثناء تحميل الصور:", error);
+        }
+      }
+
+      async function fetchContactMessages() {
+      const messagesContainer = document.getElementById("messagesContainer"); 
+      const querySnapshot = await getDocs(collection(db, "Zaytona_ContactMessages"), limit(3));
+
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        const messageCard = `
+            <div class="card">
+              <p> "${data.message || 'لا توجد رسالة'}" </p>
+              <div class="user-info">
+                <h4>${data.name || 'مجهول'}</h4>
+             </div>
+            </div>
+        `;
+        messagesContainer.innerHTML += messageCard;
+         });
+      }
+
+    
+      loadUserImages();
+      fetchContactMessages();
+    </script>
+    
+      
   </body>
 </html>

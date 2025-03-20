@@ -1,5 +1,4 @@
 
-
 import { auth, db } from "./firebaseConfig.js";
 import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
@@ -10,12 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!form) {
         console.error("❌ لم يتم العثور على النموذج! تأكد من أن `id='loginForm'` موجود في `signUp.html`.");
         return;
-    } else {
-        console.log("✅ تم العثور على النموذج بنجاح.");
     }
 
-
-    //form   
     form.addEventListener("submit", async (e) => {
         e.preventDefault(); 
         console.log("✅ تم الضغط على زر التسجيل!");
@@ -26,8 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const confirmPassword = document.getElementById("confirmPassword").value;
         const phoneNumber = document.getElementById("number").value;
 
-        console.log("📌 البيانات المدخلة:", { fullName, email, password, 
-            confirmPassword, phoneNumber });
+        console.log("📌 البيانات المدخلة:", { fullName, email, password, confirmPassword, phoneNumber });
 
         if (!fullName || !email || !password || !confirmPassword || !phoneNumber) {
             console.log("❌ لم يتم ملء جميع الحقول، لذا لن يستمر التسجيل.");
@@ -35,8 +29,6 @@ document.addEventListener("DOMContentLoaded", () => {
             message.style.color = "red";
             return;
         }
-        console.log("✅ تم إدخال جميع البيانات، يتم المتابعة للتسجيل...");
-
 
         if (password !== confirmPassword) {
             console.log("❌ كلمة المرور غير متطابقة!");
@@ -47,29 +39,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
         try {
             console.log("🔹 محاولة إنشاء المستخدم في Firebase Authentication...");
-            const userCredential = await createUserWithEmailAndPassword(auth, email,
-                 password);
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             console.log("✅ تم إنشاء المستخدم بنجاح!");
             const user = userCredential.user;
             console.log("🔹 معرف المستخدم الجديد:", user.uid);
 
-
             console.log("🔹 جاري تخزين بيانات المستخدم في Firestore...");
+
             const userData = {
                 fullName: fullName,
                 email: email,
                 phoneNumber: phoneNumber,
-                createdAt: new Date().toISOString() 
+                appType: "Zaytona",  // ✅ تحديد أن هذا المستخدم يخص زيتونة
+                createdAt: new Date().toISOString()
             };
-            
-            console.log("📌 البيانات قبل الإرسال إلى Firestore:", 
-                JSON.stringify(userData));
-            
-            await setDoc(doc(db, "users", user.uid), userData);
+
+            console.log("📌 البيانات قبل الإرسال إلى Firestore:", JSON.stringify(userData));
+
+            // ✅ تخزين المستخدمين داخل مجلد `Zaytona_Users`
+            await setDoc(doc(db, "Zaytona_Users", user.uid), userData);
             console.log("✅ تم تخزين بيانات المستخدم في Firestore بنجاح!");
-            
+
             localStorage.setItem("user", JSON.stringify(userData));
- 
 
             message.innerHTML = "✅ تم التسجيل بنجاح!";
             message.style.color = "green";
