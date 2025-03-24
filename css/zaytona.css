@@ -700,6 +700,9 @@ textarea .form-control {
   align-items: flex-end;
   flex-direction: column;
 }
+.siteContent img {
+  padding-left: 3rem;
+}
 .siteContent p {
   color: white;
   margin-top: 2rem;
