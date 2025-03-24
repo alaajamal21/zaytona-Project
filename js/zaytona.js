@@ -48,6 +48,22 @@ var swiper = new Swiper(".swiper", {
 //         document.querySelector(".play-button").style.display = "flex";
 //     }
 // });
+function navigate() {
+    var select = document.getElementById("mySelect");
+    var value = select.value;
+    if (value) {
+        window.location.href=value;
+    }
+}
+function goToPage(){
+    window.location.href="viewStory2.html"
+
+}
+function goToPage2(){
+    window.location.href="viewStory1.html"
+
+}
+
 
 
 
