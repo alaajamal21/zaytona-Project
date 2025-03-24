@@ -1341,3 +1341,64 @@ a.new-account {
   font-weight: bolder;
   z-index: 999;
 }
+/* أقسام القصص */
+.categories{
+  list-style: none;
+  padding: 0;
+}
+.categories li{
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+.categories li a{
+  text-decoration: none;
+  color: #333;
+  font-size: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.categories li a:hover{
+  color: #E55451;
+}
+.categories li span{
+  color: gray;
+  font-size: 14px;
+}
+@media (max-width: 600px) {
+  .container{
+    width: 90%;
+    padding: 15px;
+  }
+  h2{
+    font-size: 18px;
+  }
+  .categories li a{
+    font-size: 14px;
+  }
+}
+/* start section three in stories page */
+/* البحث */
+.search-section {
+  margin-top: 6rem;
+  display: flex;
+  gap: 5rem;
+  margin-bottom: -10px;
+  background: #fff7dd;
+}
+
+.search-section input, .search-section select, .search-section button {
+  padding: 10px 50px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.search-section button {
+  padding: 9px 50px ;  background: #e55451;
+  color: white;
+  cursor: pointer;
+}
+.search-section button:hover {
+  background-color: #fd7e14;;
+}
+
