@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>stories Page</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../css/all.min.css" />
+    <!-- font awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <!-- font link -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <!-- AOS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <!-- page CSS -->
+    <link rel="stylesheet" href="../css/zaytona.css" />
+  </head>
+
+  <body>
+    <!-- زر إظهار الـ Sidebar -->
+    <div class="nav-header2">
+      <button class="menu-toggle d-lg-none">☰</button>
+      <a href=""
+        ><img
+          src="../imgs/zaytoonaLogoWhite.svg"
+          alt="logo"
+          class="nav-header-logo"
+      /></a>
+    </div>
+
+    <!-- nav -->
+    <nav class="navbar navbar-expand-lg mt-4 sticky-top navbar-all">
+      <div class="container">
+        <a class="navbar-brand col-lg-3" href="home.html">
+          <img src="../imgs/zaytoonaLogoWhite.svg" alt="Zaytouna" />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          class="collapse navbar-collapse justify-content-end"
+          id="navbarNav"
+        >
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link text-white" href="home.html">الرئيسية</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="stories.html">القصص</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="logIn.html">تسجيل الدخول</a>
+            </li>
+          </ul>
+          <div class="search-box ms-3">
+            <input type="text" placeholder="بحث" id="search-input"/>
+            <button class="btn btn-sm text-muted" id="search-button">🔍</button>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- sidebar -->
+    <div class="sidebar">
+      <button class="close-sidebar">×</button>
+      <div class="sidebar-content">
+        <a href="home.html"
+          ><img
+            src="../imgs/zaytoonaLogoWhite.svg"
+            alt="logo"
+            class="sidebar-logo"
+        /></a>
+        <ul class="nav-links">
+          <li><a href="home.html">الرئيسية</a></li>
+          <li><a href="stories.html">القصص</a></li>
+          <li><a href="logIn.html">تسجيل الدخول</a></li>
+        </ul>
+      </div>
+    </div>
+
+  
+        <!-- section one -->
+        <section class="intro" style="margin-top: 5rem">
+          <div class="container">
+            <div class="row align-items-center challenge-section">
+              <div class="content col-md-8">
+                <h2 style="margin-bottom: 2rem">
+                  <span style="font-size: 40px">ما الذي ترغب بمشاهدته اليوم؟</span>
+                </h2>
+                <p>
+                  مرحبًا يا أطفال أنا اسمي أمل وسأرافقكم خلال رحلة اختيار القصة حتى
+                  انتهائها , و أتمنى لكم رحلة سعيدة بالتعرف على فلسطين
+                </p>
+              </div>
+              <div class="frame col-md-4 text-center">
+                <img
+                  src="../imgs/hiPoseGirl.svg"
+                  alt="Character"
+                  class="girl-img"
+                />
+              </div>
+            </div>
+          </div>
+        </section>     
+      <!-- قسم القصص -->
+      <section>
+          <div class="container">
+            <h2 class="title section-title"style="margin-top: 10rem;">قصص التراث </h2>
+            <div class="grid" id="results">
+                 
+                  
+                  <div class="story">
+                    <div class="video-container">
+                        <img src="../imgs/img3.jpeg" width="100%">
+                    </div>
+                    <h3 class="story-title" >السوق القديم</h3>
+                    <p style="font-size: 14px;">في قرية صغيرة، يزور امل ويزن سوقًا يظهر كل أسبوع،
+                       مليئًا بالحرفيين والطهاة الذين يشاركونهم أسرار الماضي.
+                       يشاهدون كيف تُصنع الفخار،  
+                        وتُطرّز الأقمشة،
+                         ويستمتعون بتذوق الأكلات التراثية.تحت شجرة الزيتون الكبيرة
+                       4
+                       يجلسون مع الجدة التي تروي لهم قصصًا عن التراث 
+                       وكيف كانت كل أكلة تحمل حكاية من زمن الأجداد..
+                      </p>
+                    <div class="details">
+                        <span style="margin-top: 20px;"><i class="fa fa-calendar"></i> 2025/3/1</span>
+                        <span style="margin-top: 20px;margin-bottom: 5px;"><i class="fa fa-tag"></i> التراث   </span>
+                    </div>
+                </div>
+                  
+                  
+                <div class="story">
+                  <div class="video-container">
+                    <img src="../imgs/img9.png" width="100%">
+    
+                  </div>
+                  <h3 class="story-title"  style="margin-top: 30px;"> أغنية من الماضي</h3>
+                  <p style="font-size: 14px;">تعثر امل على كلمات أغنية قديمة كانت جدتها تغنيها، فتبدأ رحلة البحث عن أصلها. تكتشف أن الأغنية كانت جزءًا من   احتفالات القرية القديمة، مثل الأعراس ومواسم الحصاد. تجمع امل القصص والتقاليد المرتبطة بها وتعيد إحياء الأغنية مع أهل القرية، لتحافظ على التراث بين الأجيال.</p>
+                  <div class="details">
+                      <span style="margin-top: 43px;"><i class="fa fa-calendar"></i> 2025/3/1</span>
+                      <span style="margin-top: 43px;"><i class="fa fa-tag"></i> التراث  </span>
+                  </div>
+              </div>
+                
+            
+          <div class="story">
+            <div class="video-container">
+              <img src="../imgs/img6.jpeg"width="100%">
+    
+            </div>
+            <h3 class="story-title" >الصندوق القديم</h3>
+            <p style="font-size: 14px;">تجد امل صندوقًا قديمًا في علية منزل العائلة، مليئًا بكتب وحكايات أجدادها. تبدأ بقراءة القصص التي تحكي عن شجاعة الأجداد، تقاليدهم في الأعياد، وحرفهم اليدوية التي كانت جزءًا من حياتهم اليومية. مع كل قصة، تكتشف امل قيمًا وأسرارًا ساعدت في تشكيل هوية عائلتها وقريتها.</p>
+            <div class="details">
+                <span style="margin-top: 20px;"><i class="fa fa-calendar"></i> 2025/3/1</span>
+                <span style="margin-top: 20px;"><i class="fa fa-tag"></i>التراث </span>
+            </div>
+        </div>
+        
+      </div>
+    </div>
+    </div>
+    </section>
+     
+    
+    
+        <!-- footer -->
+        <footer class="footer">
+          <div class="container" style="padding-top: 5.5rem">
+            <div class="row">
+              <div class="social col-lg-6">
+                <h5>تابعنا على مواقعنا</h5>
+                <div class="social-icons">
+                  <a href="#"><i class="fab fa-facebook"></i></a>
+                  <a href="#"><i class="fab fa-instagram"></i></a>
+                  <a href="#"><i class="fab fa-twitter"></i></a>
+                  <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+    
+                <h5 style="margin-top: 2rem">تواصل معنا</h5>
+                <p>
+                  <a href="mailto:zaytona2024@gmail.com" class="text-white"
+                    >zaytona2024@gmail.com</a
+                  >
+                </p>
+              </div>
+              <div class="siteContent col-lg-6">
+                <img
+                  src="../imgs/zaytoonaLogoWhite.svg"
+                  alt="Zaytouna"
+                  style="height: 50px"
+                />
+                <p>
+                  منصة تعليمية ممتعة للأطفال<br />تهدف للتعرف على فلسطين من<br />
+                  خلال القصص التفاعلية
+                </p>
+              </div>
+            </div>
+            <hr style="color: white; margin-top: 3rem" />
+            <div class="footer-links">
+              <a href="aboutUs.html">من نحن ؟ </a>
+              <a href="ourServices.html">خدماتنا</a>
+              <a href="privecy.html">الخصوصية</a>
+              <a href="contactUs.html">التواصل</a>
+              <a href="signUp.html">إنشاء حساب</a>
+              <a href="logIn.html">تسجيل دخول</a>
+            </div>
+            <p class="copyright mt-4">© جميع الحقوق محفوظة 2024 لمنصة زيتونة</p>
+          </div>
+        </footer>
+
+    <!-- إضافة مكتبة GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- page js -->
+     <script src="../js/storiesSearch.js"></script>
+    <script src="../js/GSAPanimation.js"></script>
+    <script src="../js/zaytona.js"></script>
+    <script>
+      document.getElementById("search-button").addEventListener("click", function () {
+    const searchInput = document.getElementById("search-input").value.trim();
+    const stories = document.querySelectorAll(".story");
+    const resultsContainer = document.getElementById("results");
+
+    if (!searchInput) {
+        alert("يرجى إدخال اسم القصة للبحث");
+        return;
+    }
+
+    let foundStory = null;
+
+    // البحث عن القصة المطابقة
+    stories.forEach(story => {
+        const titleElement = story.querySelector(".story-title");
+        if (titleElement && titleElement.textContent.trim().includes(searchInput)) {
+            foundStory = story.cloneNode(true); // نسخ القصة المطابقة
+        }
+    });
+
+    // مسح النتائج السابقة وعرض القصة الجديدة فقط
+    resultsContainer.innerHTML = ""; 
+
+    if (foundStory) {
+        foundStory.style.width = "300px"; // الاحتفاظ بنفس العرض
+        foundStory.style.margin = "auto"; // إبقاء القصة في المنتصف
+        resultsContainer.appendChild(foundStory);
+    } else {
+        resultsContainer.innerHTML = "<p>لم يتم العثور على أي قصة بهذا الاسم</p>";
+    }
+});
+    </script>
+  </body>
+</html>
