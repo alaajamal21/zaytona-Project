@@ -121,7 +121,7 @@
     </section>
 
     <!-- swiper -->
-    <section class="featureStories" style="margin-top: 8rem;">
+    <section class="featureStories" id="featured-stories" style="margin-top: 8rem;">
       <div class="container">
         <h2 class="title section-title">القصص المميزة</h2>
       <div class="swiper mySwiper">
@@ -353,7 +353,36 @@
       loadUserImages();
       fetchContactMessages();
     </script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      let searchInput = document.getElementById("search-Input"); // حقل البحث
+      let searchButton = document.getElementById("search-button"); // زر البحث
+  
+      if (searchInput && searchButton) {
+          function searchHandler() {
+              let query = searchInput.value.trim();
+              if (query === "القصص المميزة") {
+                  let targetSection = document.getElementById("featured-stories");
+                  if (targetSection) {
+                      targetSection.scrollIntoView({ behavior: "smooth" });
+                  }
+              }
+          }
+  
+          // تشغيل البحث عند الضغط على زر البحث
+          searchButton.addEventListener("click", searchHandler);
+  
+          // تشغيل البحث عند الضغط على Enter داخل حقل البحث
+          searchInput.addEventListener("keypress", function (event) {
+              if (event.key === "Enter") {
+                  searchHandler();
+              }
+          });
+      }
+  });
+  
     
+</script>
     
 
   </body>
