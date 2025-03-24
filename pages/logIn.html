@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Log in Page</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../css/all.min.css" />
+    <!-- font awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <!-- font link -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <!-- AOS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <!-- page CSS -->
+    <link rel="stylesheet" href="../css/zaytona.css" />
+  </head>
+
+  <body>
+    <!-- زر إظهار الـ Sidebar -->
+    <div class="nav-header2">
+      <button class="menu-toggle d-lg-none">☰</button>
+      <a href=""
+        ><img
+          src="../imgs/zaytoonaLogoWhite.svg"
+          alt="logo"
+          class="nav-header-logo"
+      /></a>
+    </div>
+
+    <!-- nav -->
+    <nav class="navbar navbar-expand-lg mt-4 sticky-top navbar-all">
+      <div class="container">
+        <a class="navbar-brand col-lg-3" href="home.html">
+          <img src="../imgs/zaytoonaLogoWhite.svg" alt="Zaytouna" />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          class="collapse navbar-collapse justify-content-end"
+          id="navbarNav"
+        >
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link text-white" href="home.html">الرئيسية</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="stories.html">القصص</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="logIn.html">تسجيل الدخول</a>
+            </li>
+          </ul>
+          <div class="search-box ms-3">
+            <input type="text" placeholder="بحث"id="search-input" />
+            <button class="btn btn-sm text-muted" id="search-button">🔍</button>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- sidebar -->
+    <div class="sidebar">
+      <button class="close-sidebar">×</button>
+      <div class="sidebar-content">
+        <a href="home.html"
+          ><img
+            src="../imgs/zaytoonaLogoWhite.svg"
+            alt="logo"
+            class="sidebar-logo"
+        /></a>
+        <ul class="nav-links">
+          <li><a href="home.html">الرئيسية</a></li>
+          <li><a href="stories.html">القصص</a></li>
+          <li><a href="logIn.html">تسجيل الدخول</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- form -->
+    <div class="login-container" id="results">
+      <div class="card-login-box">
+        <div class="color">
+          <h2 class="story-title">مرحباً بكم</h2>
+          <p>
+            أهلاً بكم في زيتونة <br />نحن سعداء برؤيتك في منصتنا<br />
+            وباعتبارك عضو جديد<br />
+            فلنلهم وندعم بعضنا البعض<br />
+          </p>
+        </div>
+        <div>
+          <form id="loginForm"class="story-title">
+            <input
+              type="text"
+              id="username"
+              placeholder="البريد الالكتروني"
+              required
+              style="margin-top: 4rem"
+            />
+            <input
+              type="password"
+              id="password"
+              placeholder="كلمة السر"
+              required
+            />
+            <button type="submit">تسجيل الدخول</button>
+            <div class="options">
+              <a href="#">هل نسيت كلمة السر؟</a>
+              <a href="signUp.html" class="new-account"
+                >لا تمتلك حساب؟ أنشئ حساب</a
+              >
+            </div>
+          </form>
+          <div class="characters-container">
+            <div class="boy">
+              <img
+                src="../imgs/boyFormHand.svg"
+                alt="طفل يمين"
+                class="character-right1"
+              />
+              <img
+                src="../imgs/boyFormHead.svg"
+                alt="طفل يمين"
+                class="character character-right"
+              />
+            </div>
+            <div class="girl">
+              <img
+                src="../imgs/girlFormHand.svg"
+                alt="طفل يسار"
+                class="character-left1"
+              />
+              <img
+                src="../imgs/girlFormHead.svg"
+                alt="طفل يسار"
+                class="character character-left"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="../js/all.min.js"></script>
+    <!-- AOS js -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- تشغيل AOS -->
+    <script>
+      AOS.init({
+        duration: 1500,
+        easing: "ease-in-out",
+        delay: 100,
+        once: false,
+      });
+    </script>
+
+    <script>
+      // اهتزاز الشخصية عند تركيز المستخدم على حقول الإدخال
+      document.querySelectorAll("input").forEach((input) => {
+        input.addEventListener("focus", () => {
+          gsap.to(".character-right", {
+            y: -5,
+            duration: 0.2,
+            repeat: 3,
+            yoyo: true,
+            ease: "power1.inOut",
+          });
+          gsap.to(".character-left", {
+            y: 10,
+            duration: 0.2,
+            repeat: 3,
+            yoyo: true,
+            ease: "power1.inOut",
+          });
+        });
+      });
+    </script>
+
+    <!-- إضافة مكتبة GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- page js -->
+    <script src="../js/validation.js"></script>
+    <script type="module" src="../js/login.js"></script>
+    <script>
+      document.getElementById("search-button").addEventListener("click", function () {
+    const searchInput = document.getElementById("search-input").value.trim();
+    const stories = document.querySelectorAll(".card-login-box");
+    const resultsContainer = document.getElementById("results");
+
+    if (!searchInput) {
+        alert("يرجى إدخال عبارة ترحيبية   ");
+        return;
+    }
+
+    let foundStory = null;
+
+    // البحث عن القصة المطابقة
+    stories.forEach(story => {
+        const titleElement = story.querySelector(".story-title");
+        if (titleElement && titleElement.textContent.trim().includes(searchInput)) {
+            foundStory = story.cloneNode(true); // نسخ القصة المطابقة
+        }
+    });
+
+    // مسح النتائج السابقة وعرض القصة الجديدة فقط
+    resultsContainer.innerHTML = ""; 
+
+    if (foundStory) {
+        foundStory.style.margin = "auto"; // إبقاء القصة في المنتصف
+        resultsContainer.appendChild(foundStory);
+    } else {
+        resultsContainer.innerHTML = "<p>لم يتم العثور على أي معلومة  </p>";
+    }
+});
+    </script>
+  </body>
+</html>
