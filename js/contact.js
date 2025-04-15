@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
             contactForm.reset();
         } catch (error) {
             console.error("❌ خطأ أثناء إرسال الرسالة:", error);
-            alert("❌ حدث خطأ أثناء الإرسال، حاول مرة أخرى.");
+            alert(" حدث خطأ أثناء رفع الصورة! عليك تسجيل الدخول إلى المنصة والمحاولة مرة أخرى.");
         }
     });
 });

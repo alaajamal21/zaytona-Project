@@ -1230,7 +1230,7 @@ a.new-account {
 /* End form section */
 
 /* Start section three */
-.faq-section .faq-title {
+.faq-section h2 {
   font-family: VIP Hala;
   font-size: 30px;
   color: #e55451;
@@ -1345,15 +1345,15 @@ a.new-account {
   z-index: 999;
 }
 /* أقسام القصص */
-.categories{
+.categories {
   list-style: none;
   padding: 0;
 }
-.categories li{
+.categories li {
   padding: 10px;
   border-bottom: 1px solid #ddd;
 }
-.categories li a{
+.categories li a {
   text-decoration: none;
   color: #333;
   font-size: 16px;
@@ -1361,51 +1361,53 @@ a.new-account {
   justify-content: space-between;
   align-items: center;
 }
-.categories li a:hover{
-  color: #E55451;
+.categories li a:hover {
+  color: #e55451;
 }
-.categories li span{
+.categories li span {
   color: gray;
   font-size: 14px;
 }
 @media (max-width: 600px) {
-  .container{
+  .container {
     width: 90%;
     padding: 15px;
   }
-  h2{
+  h2 {
     font-size: 18px;
   }
-  .categories li a{
+  .categories li a {
     font-size: 14px;
   }
 }
 /* start section three in stories page */
 /* البحث */
 .search-section {
-  margin-top: 6rem;
+  margin-top: 8rem;
   display: flex;
   gap: 5rem;
-  margin-bottom: -10px;
+  margin-bottom: -25px;
   background: #fff7dd;
 }
 
-.search-section input, .search-section select, .search-section button {
+.search-section input,
+.search-section select,
+.search-section button {
   padding: 10px 50px;
   border: 1px solid #ddd;
   border-radius: 5px;
 }
 
 .search-section button {
-  padding: 9px 50px ;  background: #e55451;
+  padding: 9px 50px;
+  background: #e55451;
   color: white;
   cursor: pointer;
 }
 .search-section button:hover {
-  background-color: #fd7e14;;
+  background-color: #fd7e14;
 }
 /* قسم القصص */
-
 
 .webinars .container {
   width: 60%;
@@ -1414,22 +1416,17 @@ a.new-account {
 }
 
 .grid {
-  margin-top: 30px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
+  gap: 30px;
 }
-.story h3{
+.story h3 {
   text-align: center;
 }
 
-.story{
+.story {
   margin-top: 3rem;
 }
-
-
-
-
 
 .video-container {
   width: 100%;
@@ -1448,13 +1445,12 @@ h3 {
   font-size: 20px;
   margin-top: 2rem;
 }
-.h333{
-  margin-top: 2rem;
-}.h3{
+.h333 {
   margin-top: 2rem;
 }
-
-
+.h3 {
+  margin-top: 2rem;
+}
 
 .details {
   display: flex;
@@ -1466,25 +1462,25 @@ h3 {
 .details i {
   margin-left: 5px;
 }
-.image{
-max-width: 50%;
+.image {
+  max-width: 50%;
 }
 
 /* تجاوب الصفحة */
 @media (max-width: 768px) {
   .container {
-      width: 500%;
-      margin-top: 18rem;
+    width: 500%;
+    margin-top: 18rem;
   }
 
   .search-section {
-      flex-direction: column;
-      align-items: center;
+    flex-direction: column;
+    align-items: center;
   }
 
-  .search-section input, .search-section select, .search-section button {
-      width: 100%;
+  .search-section input,
+  .search-section select,
+  .search-section button {
+    width: 100%;
   }
 }
-
-

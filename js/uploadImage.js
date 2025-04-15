@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         } catch (error) {
             console.error("❌ خطأ أثناء رفع الصورة:", error);
-            alert("❌ حدث خطأ أثناء رفع الصورة! حاول مرة أخرى.");
+            alert(" حدث خطأ أثناء رفع الصورة! عليك تسجيل الدخول إلى المنصة والمحاولة مرة أخرى.");
         }
     });
 });
